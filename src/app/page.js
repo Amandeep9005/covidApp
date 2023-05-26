@@ -16,8 +16,10 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -25,6 +27,10 @@ export default function Home() {
       email: data.get("email"),
       password: data.get("password"),
     });
+
+    if (data.get("email") && data.get("password")) {
+      router.push("/landing");
+    }
   };
   return (
     <div
